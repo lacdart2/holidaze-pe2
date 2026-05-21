@@ -96,7 +96,7 @@ export default function Register() {
                             <button
                                 type="button"
                                 onClick={() => setIsManager(false)}
-                                className={`flex-1 py-2 rounded-lg text-sm font-medium border cursor-pointer ${!isManager
+                                className={`flex-1 py-2 rounded-lg text-sm font-medium border cursor-pointer transition-colors duration-200 ${!isManager
                                     ? "bg-orange-600 text-white border-orange-600"
                                     : "bg-white text-gray-800 border-gray-300"
                                     }`}
@@ -106,7 +106,7 @@ export default function Register() {
                             <button
                                 type="button"
                                 onClick={() => setIsManager(true)}
-                                className={`flex-1 py-2 rounded-lg text-sm font-medium border cursor-pointer ${isManager
+                                className={`flex-1 py-2 rounded-lg text-sm font-medium border cursor-pointer transition-colors duration-200 ${isManager
                                     ? "bg-orange-600 text-white border-orange-600"
                                     : "bg-white text-gray-800 border-gray-300"
                                     }`}
