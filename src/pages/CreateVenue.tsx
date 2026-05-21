@@ -85,12 +85,11 @@ export default function CreateVenue() {
                         <label className="text-sm text-gray-700">Price per night (NOK)</label>
                         <input
                             type="number"
-                            placeholder="e.g. 4"
-                            value={maxGuests}
-                            onChange={(e) => setMaxGuests(e.target.value)}
+                            placeholder="e.g. 800"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
                             className="border rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-500"
                             min="1"
-                            max="50"
                             required
                         />
                     </div>
