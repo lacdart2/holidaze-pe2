@@ -8,8 +8,10 @@ export default function Login() {
     const navigate = useNavigate();
     const setUser = useAuthStore((state) => state.setUser);
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    /* const [email, setEmail] = useState("");
+    const [password, setPassword] = useState(""); */
+    const [email, setEmail] = useState("kader@stud.noroff.no");
+    const [password, setPassword] = useState("Kader-123");
     const [loading, setLoading] = useState(false);
 
     async function handleSubmit(e: React.FormEvent) {
@@ -73,7 +75,7 @@ export default function Login() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="flex justify-center bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 font-medium cursor-pointer transition-colors duration-200"
+                        className="flex justify-center bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 font-medium cursor-pointer transition-colors duration-200 "
                     >
                         {loading ? "Logging in..." : "Log In"}
                     </button>
