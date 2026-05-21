@@ -62,7 +62,7 @@ export default function Register() {
                             className="border rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-500"
                             required
                         />
-                        <p className="text-xs text-gray-400">Only letters, numbers and underscore allowed</p>
+                        <p className="text-xs text-gray-400">No spaces or special characters</p>
                     </div>
 
                     {/* email */}
