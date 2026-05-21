@@ -1,11 +1,22 @@
+import { useEffect } from "react";
+import AppRouter from "./routes/AppRouter";
+import { useAuthStore } from "./store/authStore";
+import { loadUserFromStorage } from "./store/authStore";
+import { Toaster } from "react-hot-toast";
 
-import './App.css'
+export default function App() {
+  const setUser = useAuthStore((state) => state.setUser);
 
-function App() {
+  // load user from localStorage
+  useEffect(() => {
+    const user = loadUserFromStorage();
+    if (user) setUser(user);
+  }, [setUser]);
 
   return (
-    <h1 className="text-3xl font-bold text-blue-600">Holidaze works!</h1>
-  )
+    <>
+      <Toaster position="top-right" />
+      <AppRouter />
+    </>
+  );
 }
-
-export default App
