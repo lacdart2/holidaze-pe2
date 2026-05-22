@@ -82,7 +82,8 @@ export default function EditVenue() {
     if (fetching) return <p className="text-center py-20">Loading venue...</p>;
 
     return (
-        <div className="max-w-2xl mx-auto px-6 py-10">
+        /*     <div className="max-w-2xl mx-auto px-6 py-10"> */
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
             <h1 className="font-bold text-3xl text-gray-900 mb-8">Edit Venue</h1>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -108,7 +109,8 @@ export default function EditVenue() {
                     />
                 </div>
 
-                <div className="flex gap-4">
+                {/*     <div className="flex gap-4"> */}
+                <div className="flex flex-col sm:flex-row gap-4">
                     <div className="flex flex-col gap-1 flex-1">
                         <label className="text-sm text-gray-700">Price per night (NOK)</label>
                         <input
@@ -145,7 +147,8 @@ export default function EditVenue() {
                     />
                 </div>
 
-                <div className="flex gap-4">
+                {/*  <div className="flex gap-4"> */}
+                <div className="flex flex-col sm:flex-row gap-4">
                     <div className="flex flex-col gap-1 flex-1">
                         <label className="text-sm text-gray-700">City</label>
                         <input

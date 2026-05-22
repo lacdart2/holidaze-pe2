@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { createVenue } from "../api/venues";
 import { useAuthStore } from "../store/authStore";
 import toast from "react-hot-toast";
+import { venueSchema } from "../utils/validation";
 
 export default function CreateVenue() {
     const navigate = useNavigate();
@@ -20,14 +21,25 @@ export default function CreateVenue() {
     const [parking, setParking] = useState(false);
     const [breakfast, setBreakfast] = useState(false);
     const [pets, setPets] = useState(false);
+    const [errors, setErrors] = useState<Record<string, string>>({});
 
     if (!user || !user.venueManager) {
         navigate("/");
         return null;
     }
 
-    async function handleSubmit(e: React.FormEvent) {
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        setErrors({});
+        const result = venueSchema.safeParse({ name, description, price, maxGuests, imageUrl });
+        if (!result.success) {
+            const fieldErrors: Record<string, string> = {};
+            result.error.issues.forEach((err) => {
+                if (err.path[0]) fieldErrors[String(err.path[0])] = err.message;
+            });
+            setErrors(fieldErrors);
+            return;
+        }
         setLoading(true);
 
         try {
@@ -52,7 +64,8 @@ export default function CreateVenue() {
     }
 
     return (
-        <div className="max-w-2xl mx-auto px-6 py-10">
+        /*  <div className="max-w-2xl mx-auto px-6 py-10"> */
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
             <h1 className="font-bold text-3xl text-gray-900 mb-8">Create Venue</h1>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -67,6 +80,7 @@ export default function CreateVenue() {
                         className="border rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-500"
                         required
                     />
+                    {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
                 </div>
 
                 <div className="flex flex-col gap-1">
@@ -78,9 +92,11 @@ export default function CreateVenue() {
                         className="border rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-500 resize-none h-28"
                         required
                     />
+                    {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
                 </div>
 
-                <div className="flex gap-4">
+                {/*  <div className="flex gap-4"> */}
+                <div className="flex flex-col sm:flex-row gap-4">
                     <div className="flex flex-col gap-1 flex-1">
                         <label className="text-sm text-gray-700">Price per night (NOK)</label>
                         <input
@@ -92,6 +108,7 @@ export default function CreateVenue() {
                             min="1"
                             required
                         />
+                        {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
                     </div>
 
                     <div className="flex flex-col gap-1 flex-1">
@@ -105,6 +122,7 @@ export default function CreateVenue() {
                             min="1"
                             required
                         />
+                        {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
                     </div>
                 </div>
 
@@ -117,9 +135,11 @@ export default function CreateVenue() {
                         onChange={(e) => setImageUrl(e.target.value)}
                         className="border rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-500"
                     />
+                    {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
                 </div>
 
-                <div className="flex gap-4">
+                {/*   <div className="flex gap-4"> */}
+                <div className="flex flex-col sm:flex-row gap-4">
                     <div className="flex flex-col gap-1 flex-1">
                         <label className="text-sm text-gray-700">City</label>
                         <input
