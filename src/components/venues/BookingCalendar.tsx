@@ -25,7 +25,7 @@ export default function BookingCalendar({ bookings, dateFrom, dateTo, onChangeDa
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
-                <label className="text-sm font-medium text-gray-700">Check-in</label>
+                {/*    <label className="text-sm font-medium text-gray-700">Check-in</label> */}
                 <DatePicker
                     selected={dateFrom}
                     onChange={(date) => {
@@ -42,7 +42,7 @@ export default function BookingCalendar({ bookings, dateFrom, dateTo, onChangeDa
             </div>
 
             <div className="flex flex-col gap-1">
-                <label className="text-sm font-medium text-gray-700">Check-out</label>
+                {/*  <label className="text-sm font-medium text-gray-700">Check-out</label> */}
                 <DatePicker
                     selected={dateTo}
                     onChange={onChangeDateTo}
