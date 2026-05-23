@@ -45,7 +45,7 @@ export default function Home() {
                         placeholder="Search by destination, city or venue name..."
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        className="flex-1 px-4 py-3 text-sm outline-none bg-transparent text-stone-900 placeholder-stone-400"
+                        className="flex-1 px-4 py-3 text-sm outline-none bg-transparent text-stone-900 placeholder-stone-400 rounded-xl"
                     />
                     <button
                         type="submit"
@@ -55,7 +55,7 @@ export default function Home() {
                     </button>
                 </form>
             </section>
-            {/* popular venues */}
+            {/* popularvenues */}
             <section className="max-w-6xl mx-auto px-6 py-12">
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="font-bold text-2xl text-gray-900">Popular Venues</h2>
