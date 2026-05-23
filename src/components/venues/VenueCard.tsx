@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import StarRating from "../common/StarRating";
 import type { Venue } from "../../api/venues";
 
 interface Props {
@@ -25,9 +26,15 @@ export default function VenueCard({ venue }: Props) {
                 className="w-full h-48 object-cover"
             />
             <div className="flex flex-col gap-1 p-4">
+                {/*  <h3 className="font-semibold text-stone-900 text-base line-clamp-1">{venue.name}</h3>
+                <p className="text-stone-500 text-sm">{city}{country ? `, ${country}` : ""}</p>
+                <p className="font-bold text-orange-600 mt-1">NOK {venue.price} <span className="text-stone-400 font-normal text-xs">/ night</span></p> */}
                 <h3 className="font-semibold text-stone-900 text-base line-clamp-1">{venue.name}</h3>
                 <p className="text-stone-500 text-sm">{city}{country ? `, ${country}` : ""}</p>
-                <p className="font-bold text-orange-600 mt-1">NOK {venue.price} <span className="text-stone-400 font-normal text-xs">/ night</span></p>
+                <div className="flex items-center justify-between mt-1">
+                    <p className="font-bold text-orange-600">NOK {venue.price} <span className="text-stone-400 font-normal text-xs">/ night</span></p>
+                    {venue.rating > 0 && <StarRating rating={venue.rating} size={12} />}
+                </div>
             </div>
         </Link>
     );

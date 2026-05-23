@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ImagePlus, Loader2, X } from "lucide-react";
+import { ImagePlus, Loader2, X, Star } from "lucide-react";
 import toast from "react-hot-toast";
 import { createVenue } from "../api/venues";
 import { useAuthStore } from "../store/authStore";
@@ -29,6 +29,7 @@ export default function CreateVenue() {
     const [breakfast, setBreakfast] = useState(false);
     const [pets, setPets] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
+    const [rating, setRating] = useState("");
 
     if (!user || !user.venueManager) {
         navigate("/");
@@ -107,6 +108,7 @@ export default function CreateVenue() {
                 })),
                 location: { city, country },
                 meta: { wifi, parking, breakfast, pets },
+                rating: rating ? Number(rating) : undefined,
             });
 
             toast.success("Venue created!");
@@ -206,7 +208,50 @@ export default function CreateVenue() {
                                 )}
                             </div>
                         </div>
-
+                        {/* <div className="grid gap-1.5">
+                            <label className="text-sm font-bold text-stone-700">
+                                Rating (0–5)
+                            </label>
+                            <input
+                                type="number"
+                                placeholder="e.g. 4"
+                                value={rating}
+                                onChange={(e) => setRating(e.target.value)}
+                                className="rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 shadow-[inset_0_1px_3px_rgba(0,0,0,0.05)] outline-none transition-all duration-200 placeholder:text-stone-400 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10"
+                                min="0"
+                                max="5"
+                                step="0.1"
+                            />
+                        </div> */}
+                        <div className="grid gap-1.5">
+                            <label className="text-sm font-bold text-stone-700">
+                                Rating
+                            </label>
+                            <div className="flex items-center gap-2">
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                    <button
+                                        key={star}
+                                        type="button"
+                                        onClick={() => setRating(String(star))}
+                                        className="cursor-pointer transition-transform duration-150 hover:scale-110"
+                                    >
+                                        <Star
+                                            size={28}
+                                            className={
+                                                star <= Number(rating)
+                                                    ? "fill-orange-500 text-orange-500"
+                                                    : "fill-stone-200 text-stone-200"
+                                            }
+                                        />
+                                    </button>
+                                ))}
+                                {rating && (
+                                    <span className="ml-2 text-sm font-bold text-stone-600">
+                                        {rating}/5
+                                    </span>
+                                )}
+                            </div>
+                        </div>
                         <div className="grid gap-3 rounded-2xl bg-orange-50/60 p-4">
                             <div>
                                 <label className="text-sm font-bold text-stone-700">

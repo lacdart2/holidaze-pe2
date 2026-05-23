@@ -11,6 +11,7 @@ import BookingConfirmModal from "../components/venues/BookingConfirmModal";
 import { getProfile, getProfileVenues } from "../api/profiles";
 import type { Profile } from "../api/profiles";
 import HostVenuesModal from "../components/venues/HostVenuesModal";
+import StarRating from "../components/common/StarRating";
 
 export default function VenueDetails() {
     const { id } = useParams();
@@ -135,7 +136,7 @@ export default function VenueDetails() {
 
                 <div className="mb-5">
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">{venue.name}</h1>
-                    <div className="flex items-center gap-4 flex-wrap text-sm text-gray-500">
+                    {/*   <div className="flex items-center gap-4 flex-wrap text-sm text-gray-500">
                         <span className="flex items-center gap-1">
                             <Star size={14} className="text-orange-500 fill-orange-500" />
                             {venue.rating} rating
@@ -147,6 +148,23 @@ export default function VenueDetails() {
                         {location && (
                             <span className="flex items-center gap-1.5">
                                 <MapPin size={14} className="text-orange-500" /> {location}
+                            </span>
+                        )}
+                    </div> */}
+                    <div className="flex flex-wrap items-center gap-3 text-sm">
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-orange-100 bg-orange-50 px-3 py-1 font-medium text-stone-900">
+                            <StarRating rating={venue.rating} size={14} />
+                        </span>
+
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-stone-200 bg-stone-100 px-3 py-1 font-medium text-stone-700">
+                            <Users size={14} className="text-stone-500" />
+                            Max {venue.maxGuests} guests
+                        </span>
+
+                        {location && (
+                            <span className="inline-flex items-center gap-1.5 font-medium text-stone-500">
+                                <MapPin size={14} className="text-orange-500" />
+                                {location}
                             </span>
                         )}
                     </div>
@@ -277,9 +295,12 @@ export default function VenueDetails() {
                                     <span className="text-2xl font-bold text-orange-600">NOK {venue.price}</span>
                                     <span className="text-sm text-gray-400"> / night</span>
                                 </div>
-                                <div className="flex items-center gap-1 text-sm text-gray-500">
+                                {/*  <div className="flex items-center gap-1 text-sm text-gray-500">
                                     <Star size={13} className="text-orange-500 fill-orange-500" />
                                     {venue.rating}
+                                </div> */}
+                                <div className="rounded-full border border-orange-100 bg-orange-50 px-2.5 py-1">
+                                    <StarRating rating={venue.rating} size={13} showNumber />
                                 </div>
                             </div>
 
