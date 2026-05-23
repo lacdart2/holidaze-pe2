@@ -1,96 +1,272 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ChevronDown, LogOut, Menu, UserRound, X } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
 
 export default function Navbar() {
     const { user, logout } = useAuthStore();
     const navigate = useNavigate();
-    const [open, setOpen] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement>(null);
 
-    // close dropdown when clicking outside
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
+
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const mobileMenuRef = useRef<HTMLDivElement>(null);
+    const hamburgerRef = useRef<HTMLButtonElement>(null);
+
     useEffect(() => {
-        function handleClickOutside(e: MouseEvent) {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-                setOpen(false);
+        function handleClickOutside(event: MouseEvent) {
+            const target = event.target as Node;
+
+            if (dropdownRef.current && !dropdownRef.current.contains(target)) {
+                setDropdownOpen(false);
+            }
+
+            if (
+                mobileMenuRef.current &&
+                !mobileMenuRef.current.contains(target) &&
+                hamburgerRef.current &&
+                !hamburgerRef.current.contains(target)
+            ) {
+                setMobileOpen(false);
             }
         }
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    useEffect(() => {
+        function handleEscape(event: KeyboardEvent) {
+            if (event.key === "Escape") {
+                setDropdownOpen(false);
+                setMobileOpen(false);
+            }
+        }
+
+        document.addEventListener("keydown", handleEscape);
+        return () => document.removeEventListener("keydown", handleEscape);
+    }, []);
+
+    function closeMenus() {
+        setDropdownOpen(false);
+        setMobileOpen(false);
+    }
+
     function handleLogout() {
         logout();
+        closeMenus();
         navigate("/");
     }
 
-    return (
-        <nav className="flex justify-between items-center bg-white border-b px-10 py-4">
-            <Link to="/" className="font-bold text-2xl text-orange-600">
-                Holidaze
-            </Link>
+    const dashboardPath = user?.venueManager ? "/manager" : "/dashboard";
+    const dashboardLabel = user?.venueManager ? "My Venues" : "My Bookings";
+    const roleLabel = user?.venueManager ? "Venue Manager" : "Customer";
+    const avatarSrc = user?.avatar || "https://placehold.co/80x80/FFF7ED/EA580C?text=?";
 
-            <div className="flex items-center gap-6">
-                <Link to="/venues" className="text-gray-800 hover:text-orange-600">
-                    Venues
+    return (
+        <nav className="sticky top-0 z-50 w-full border-b border-stone-100 bg-white/90 shadow-[0_1px_8px_rgba(28,25,23,0.06)] backdrop-blur-md">
+            <div className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-10 lg:py-4">
+                <Link
+                    to="/"
+                    onClick={closeMenus}
+                    className="text-2xl font-extrabold tracking-tight text-orange-600 sm:text-3xl"
+                    aria-label="Holidaze home"
+                >
+                    Holidaze
                 </Link>
 
-                {!user ? (
-                    <>
-                        <Link to="/login" className="text-gray-800 hover:text-orange-600">
-                            Login
-                        </Link>
-                        <Link to="/register" className="flex items-center bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors duration-200 cursor-pointer">
-                            Register
-                        </Link>
-                    </>
-                ) : (
-                    <div className="relative" ref={dropdownRef}>
-                        <button
-                            onClick={() => setOpen(!open)}
-                            className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
-                        >
-                            <img
-                                src={user.avatar || "https://placehold.co/40x40?text=?"}
-                                alt="avatar"
-                                className="w-9 h-9 rounded-full object-cover border"
-                                onError={(e) => { e.currentTarget.src = "https://placehold.co/40x40?text=?"; }}
-                            />
-                            <span className="text-sm text-gray-800">{user.name}</span>
-                            <span className="text-xs text-gray-500">▾</span>
-                        </button>
+                {/* Desktop navigation */}
+                <div className="hidden items-center gap-6 md:flex">
+                    <Link
+                        to="/venues"
+                        className="rounded-lg px-3 py-2 text-sm font-medium text-stone-700 transition-colors duration-200 hover:bg-orange-50 hover:text-orange-600"
+                    >
+                        Venues
+                    </Link>
 
-                        {open && (
-                            <div className="absolute right-0 top-12 bg-white border rounded-xl shadow-lg w-48 py-2 z-50">
-                                <p className="text-xs text-gray-400 px-4 py-1">
-                                    {user.venueManager ? "Venue Manager" : "Customer"}
-                                </p>
-                                <hr className="my-1" />
-                                {user.venueManager ? (
+                    {!user ? (
+                        <div className="flex items-center gap-3">
+                            <Link
+                                to="/login"
+                                className="rounded-lg px-3 py-2 text-sm font-medium text-stone-700 transition-colors duration-200 hover:bg-orange-50 hover:text-orange-600"
+                            >
+                                Login
+                            </Link>
+
+                            <Link
+                                to="/register"
+                                className="rounded-xl bg-orange-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_12px_rgba(234,88,12,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-orange-700 hover:shadow-[0_6px_16px_rgba(234,88,12,0.35)]"
+                            >
+                                Register
+                            </Link>
+                        </div>
+                    ) : (
+                        <div className="relative" ref={dropdownRef}>
+                            <button
+                                type="button"
+                                onClick={() => setDropdownOpen((open) => !open)}
+                                className="flex items-center gap-3 rounded-full border border-stone-200 bg-white px-2 py-1.5 shadow-sm transition-all duration-200 hover:border-orange-200 hover:bg-orange-50/60"
+                                aria-expanded={dropdownOpen}
+                                aria-label="Open user menu"
+                            >
+                                <img
+                                    src={avatarSrc}
+                                    alt={`${user.name} avatar`}
+                                    className="h-9 w-9 rounded-full border-2 border-orange-100 object-cover"
+                                    onError={(event) => {
+                                        event.currentTarget.src =
+                                            "https://placehold.co/80x80/FFF7ED/EA580C?text=?";
+                                    }}
+                                />
+
+                                <span className="max-w-32 truncate text-sm font-semibold text-stone-800">
+                                    {user.name}
+                                </span>
+
+                                <ChevronDown
+                                    size={16}
+                                    className={`text-stone-400 transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""
+                                        }`}
+                                />
+                            </button>
+
+                            {dropdownOpen && (
+                                <div className="absolute right-0 top-14 z-50 w-60 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-[0_16px_40px_rgba(28,25,23,0.14)]">
+                                    <div className="border-b border-stone-100 bg-orange-50/70 px-4 py-3">
+                                        <p className="truncate text-sm font-bold text-stone-900">
+                                            {user.name}
+                                        </p>
+                                        <p className="text-xs font-medium text-stone-500">
+                                            {roleLabel}
+                                        </p>
+                                    </div>
+
+                                    <div className="p-2">
+                                        <Link
+                                            to="/venues"
+                                            onClick={closeMenus}
+                                            className="block rounded-xl px-3 py-2.5 text-sm font-medium text-stone-700 transition-colors duration-200 hover:bg-orange-50 hover:text-orange-600"
+                                        >
+                                            Venues
+                                        </Link>
+
+                                        <Link
+                                            to={dashboardPath}
+                                            onClick={closeMenus}
+                                            className="block rounded-xl px-3 py-2.5 text-sm font-medium text-stone-700 transition-colors duration-200 hover:bg-orange-50 hover:text-orange-600"
+                                        >
+                                            {dashboardLabel}
+                                        </Link>
+
+                                        <button
+                                            type="button"
+                                            onClick={handleLogout}
+                                            className="mt-1 flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-red-600 transition-colors duration-200 hover:bg-red-50"
+                                        >
+                                            <LogOut size={16} />
+                                            Logout
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+
+                {/* Mobile hamburger */}
+                <button
+                    ref={hamburgerRef}
+                    type="button"
+                    onClick={() => setMobileOpen((open) => !open)}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-700 shadow-sm transition-colors duration-200 hover:bg-orange-50 hover:text-orange-600 md:hidden"
+                    aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                    aria-expanded={mobileOpen}
+                >
+                    {mobileOpen ? <X size={23} /> : <Menu size={23} />}
+                </button>
+
+                {/* Mobile menu */}
+                {mobileOpen && (
+                    <div
+                        ref={mobileMenuRef}
+                        className="absolute left-3 right-3 top-[calc(100%+0.5rem)] z-50 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-[0_20px_50px_rgba(28,25,23,0.18)] md:hidden"
+                    >
+                        <div className="flex flex-col p-3">
+                            <Link
+                                to="/venues"
+                                onClick={closeMenus}
+                                className="rounded-xl px-4 py-3 text-base font-semibold text-stone-800 transition-colors duration-200 hover:bg-orange-50 hover:text-orange-600"
+                            >
+                                Venues
+                            </Link>
+
+                            {!user ? (
+                                <div className="mt-2 grid gap-2 border-t border-stone-100 pt-3">
                                     <Link
-                                        to="/manager"
-                                        onClick={() => setOpen(false)}
-                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                                        to="/login"
+                                        onClick={closeMenus}
+                                        className="rounded-xl px-4 py-3 text-center text-base font-semibold text-stone-800 transition-colors duration-200 hover:bg-orange-50 hover:text-orange-600"
                                     >
-                                        My Venues
+                                        Login
                                     </Link>
-                                ) : (
+
                                     <Link
-                                        to="/dashboard"
-                                        onClick={() => setOpen(false)}
-                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                                        to="/register"
+                                        onClick={closeMenus}
+                                        className="rounded-xl bg-orange-600 px-4 py-3 text-center text-base font-bold text-white shadow-[0_4px_12px_rgba(234,88,12,0.25)] transition-colors duration-200 hover:bg-orange-700"
                                     >
-                                        My Bookings
+                                        Register
                                     </Link>
-                                )}
-                                <button
-                                    onClick={handleLogout}
-                                    className="flex w-full px-4 py-2 text-sm text-red-500 hover:bg-gray-50 cursor-pointer"
-                                >
-                                    Logout
-                                </button>
-                            </div>
-                        )}
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="my-3 rounded-2xl border border-orange-100 bg-orange-50/70 p-4">
+                                        <Link
+                                            to={dashboardPath}
+                                            onClick={closeMenus}
+                                            className="flex items-center gap-3"
+                                        >
+                                            <img
+                                                src={avatarSrc}
+                                                alt={`${user.name} avatar`}
+                                                className="h-12 w-12 rounded-full border-2 border-orange-200 bg-white object-cover"
+                                                onError={(event) => {
+                                                    event.currentTarget.src =
+                                                        "https://placehold.co/80x80/FFF7ED/EA580C?text=?";
+                                                }}
+                                            />
+
+                                            <div className="min-w-0">
+                                                <p className="truncate text-base font-bold text-stone-900">
+                                                    {user.name}
+                                                </p>
+                                                <p className="text-sm font-medium text-stone-500">
+                                                    {roleLabel}
+                                                </p>
+                                            </div>
+                                        </Link>
+                                    </div>
+
+                                    <Link
+                                        to={dashboardPath}
+                                        onClick={closeMenus}
+                                        className="rounded-xl px-4 py-3 text-base font-semibold text-stone-800 transition-colors duration-200 hover:bg-orange-50 hover:text-orange-600"
+                                    >
+                                        {dashboardLabel}
+                                    </Link>
+
+                                    <button
+                                        type="button"
+                                        onClick={handleLogout}
+                                        className="mt-2 flex w-full items-center gap-2 rounded-xl px-4 py-3 text-left text-base font-bold text-red-600 transition-colors duration-200 hover:bg-red-50"
+                                    >
+                                        <LogOut size={18} />
+                                        Logout
+                                    </button>
+                                </>
+                            )}
+                        </div>
                     </div>
                 )}
             </div>
