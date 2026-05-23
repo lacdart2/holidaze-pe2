@@ -31,7 +31,7 @@ export default function Home() {
 
     return (
         <div>
-            <section className="flex flex-col items-center justify-center bg-gray-100 px-6 py-24 text-center">
+            <section className="flex flex-col items-center justify-center bg-gradient-to-b from-orange-50 to-white px-6 py-24 text-center">
                 <h1 className="font-bold text-5xl text-gray-900 mb-4">
                     Find Your Perfect Stay
                 </h1>
@@ -39,17 +39,17 @@ export default function Home() {
                     Discover unique venues around the world
                 </p>
 
-                <form onSubmit={handleSearch} className="flex gap-3 w-full max-w-xl">
+                <form onSubmit={handleSearch} className="flex gap-2 w-full max-w-2xl bg-white rounded-2xl shadow-[0_4px_20px_rgba(28,25,23,0.10)] p-2">
                     <input
                         type="text"
-                        placeholder="Search venues..."
+                        placeholder="Search by destination, city or venue name..."
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        className="flex-1 border rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-500"
+                        className="flex-1 px-4 py-3 text-sm outline-none bg-transparent text-stone-900 placeholder-stone-400"
                     />
                     <button
                         type="submit"
-                        className="flex items-center bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors duration-200 cursor-pointer"
+                        className="bg-orange-600 text-white px-6 py-3 rounded-xl hover:bg-orange-700 transition-colors duration-200 cursor-pointer font-medium text-sm"
                     >
                         Search
                     </button>
