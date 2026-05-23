@@ -166,7 +166,7 @@ export default function ManagerDashboard() {
                                 <button
                                     type="button"
                                     onClick={() => setShowAvatarForm((open) => !open)}
-                                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-stone-800 shadow-[0_4px_14px_rgba(28,25,23,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-orange-50"
+                                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-stone-800 shadow-[0_4px_14px_rgba(28,25,23,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-orange-50 cursor-pointer"
                                 >
                                     <ImageUp size={17} />
                                     Update avatar
@@ -175,7 +175,7 @@ export default function ManagerDashboard() {
                                 <button
                                     type="button"
                                     onClick={() => navigate("/manager/create")}
-                                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-5 py-3 text-sm font-bold text-white shadow-[0_4px_14px_rgba(234,88,12,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-orange-700"
+                                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-5 py-3 text-sm font-bold text-white shadow-[0_4px_14px_rgba(234,88,12,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-orange-700 cursor-pointer"
                                 >
                                     <Plus size={18} />
                                     Add Venue
@@ -302,7 +302,7 @@ export default function ManagerDashboard() {
                                                 <button
                                                     type="button"
                                                     onClick={() => navigate(`/manager/edit/${venue.id}`)}
-                                                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-stone-900 px-4 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-stone-800"
+                                                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-stone-900 px-4 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-stone-800 cursor-pointer"
                                                 >
                                                     <Edit size={15} />
                                                     Edit
@@ -311,7 +311,7 @@ export default function ManagerDashboard() {
                                                 <button
                                                     type="button"
                                                     onClick={() => setDeleteId(venue.id)}
-                                                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-600 transition-colors duration-200 hover:bg-red-100"
+                                                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-600 transition-colors duration-200 hover:bg-red-100 cursor-pointer"
                                                 >
                                                     <Trash2 size={15} />
                                                     Delete
@@ -348,7 +348,7 @@ export default function ManagerDashboard() {
                                     key={booking.id}
                                     type="button"
                                     onClick={() => navigate(`/venues/${booking.venueId}`)}
-                                    className="grid gap-3 rounded-2xl bg-white p-4 text-left shadow-[0_4px_18px_rgba(28,25,23,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(28,25,23,0.12)] sm:grid-cols-[1fr_auto]"
+                                    className="grid gap-3 rounded-2xl bg-white p-4 text-left shadow-[0_4px_18px_rgba(28,25,23,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(28,25,23,0.12)] sm:grid-cols-[1fr_auto] cursor-pointer"
                                 >
                                     <div>
                                         <h3 className="font-bold text-stone-900">
