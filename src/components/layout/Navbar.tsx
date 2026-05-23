@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ChevronDown, LogOut, Menu, UserRound, X } from "lucide-react";
+import { ChevronDown, LogOut, Menu, X } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
 
 export default function Navbar() {
@@ -76,7 +76,7 @@ export default function Navbar() {
                     Holidaze
                 </Link>
 
-                {/* Desktop navigation */}
+                {/* desktop navigation */}
                 <div className="hidden items-center gap-6 md:flex">
                     <Link
                         to="/venues"
@@ -174,7 +174,7 @@ export default function Navbar() {
                     )}
                 </div>
 
-                {/* Mobile hamburger */}
+                {/* mobile hamburger */}
                 <button
                     ref={hamburgerRef}
                     type="button"
@@ -186,7 +186,7 @@ export default function Navbar() {
                     {mobileOpen ? <X size={23} /> : <Menu size={23} />}
                 </button>
 
-                {/* Mobile menu */}
+                {/* mobile menu */}
                 {mobileOpen && (
                     <div
                         ref={mobileMenuRef}
