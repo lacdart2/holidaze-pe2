@@ -4,7 +4,7 @@ import { getVenueById } from "../api/venues";
 import type { Venue } from "../api/venues";
 import { createBooking } from "../api/bookings";
 import { useAuthStore } from "../store/authStore";
-import { Wifi, Car, Coffee, PawPrint, Star, Users, ShieldCheck, Building, CalendarCheck, MapPin, ChevronRight } from "lucide-react";
+import { Wifi, Car, Coffee, PawPrint, Users, ShieldCheck, Building, CalendarCheck, MapPin, ChevronRight } from "lucide-react";
 import BookingCalendar from "../components/venues/BookingCalendar";
 import toast from "react-hot-toast";
 import BookingConfirmModal from "../components/venues/BookingConfirmModal";
@@ -29,6 +29,7 @@ export default function VenueDetails() {
     const [ownerProfile, setOwnerProfile] = useState<Profile | null>(null);
     const [showHostVenues, setShowHostVenues] = useState(false);
     const [hostVenues, setHostVenues] = useState<Venue[]>([]);
+    const [showBookingPop, setShowBookingPop] = useState(false);
     const [activeImage, setActiveImage] = useState(0);
     const [showCheckinPicker, setShowCheckinPicker] = useState(false);
     const [showCheckoutPicker, setShowCheckoutPicker] = useState(false);
@@ -56,6 +57,14 @@ export default function VenueDetails() {
     }, [id]);
 
     const calendarRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (venue && venue._count?.bookings && venue._count.bookings > 1) {
+            const timer = setTimeout(() => setShowBookingPop(true), 1200);
+            const hideTimer = setTimeout(() => setShowBookingPop(false), 5000);
+            return () => { clearTimeout(timer); clearTimeout(hideTimer); };
+        }
+    }, [venue]);
 
     useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
@@ -136,21 +145,6 @@ export default function VenueDetails() {
 
                 <div className="mb-5">
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">{venue.name}</h1>
-                    {/*   <div className="flex items-center gap-4 flex-wrap text-sm text-gray-500">
-                        <span className="flex items-center gap-1">
-                            <Star size={14} className="text-orange-500 fill-orange-500" />
-                            {venue.rating} rating
-                        </span>
-                        <span className="flex items-center gap-1.5">
-                            <Users size={14} />
-                            Max {venue.maxGuests} guests
-                        </span>
-                        {location && (
-                            <span className="flex items-center gap-1.5">
-                                <MapPin size={14} className="text-orange-500" /> {location}
-                            </span>
-                        )}
-                    </div> */}
                     <div className="flex flex-wrap items-center gap-3 text-sm">
                         <span className="inline-flex items-center gap-1.5 rounded-full border border-orange-100 bg-orange-50 px-3 py-1 font-medium text-stone-900">
                             <StarRating rating={venue.rating} size={14} />
@@ -295,10 +289,6 @@ export default function VenueDetails() {
                                     <span className="text-2xl font-bold text-orange-600">NOK {venue.price}</span>
                                     <span className="text-sm text-gray-400"> / night</span>
                                 </div>
-                                {/*  <div className="flex items-center gap-1 text-sm text-gray-500">
-                                    <Star size={13} className="text-orange-500 fill-orange-500" />
-                                    {venue.rating}
-                                </div> */}
                                 <div className="rounded-full border border-orange-100 bg-orange-50 px-2.5 py-1">
                                     <StarRating rating={venue.rating} size={13} showNumber />
                                 </div>
@@ -376,7 +366,16 @@ export default function VenueDetails() {
                     </div>
                 </div>
             </div>
-
+            {showBookingPop && venue._count?.bookings && venue._count.bookings > 1 && (
+                <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${showBookingPop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}>
+                    <div className="flex items-center gap-3 bg-stone-900 text-white px-5 py-3 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
+                        <span className="text-lg">🔥</span>
+                        <p className="text-sm font-semibold">
+                            <span className="text-orange-400 font-bold">{venue._count.bookings}</span> people have booked this venue
+                        </p>
+                    </div>
+                </div>
+            )}
             {showModal && dateFrom && dateTo && (
                 <BookingConfirmModal
                     venueName={venue.name}

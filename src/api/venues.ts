@@ -19,9 +19,13 @@ export interface Venue {
         pets: boolean;
     };
     bookings?: Booking[];
+    _count?: {
+        bookings: number;
+    };
     owner?: {
         name: string;
         email: string;
+        avatar?: { url: string; alt: string };
     };
 }
 
@@ -44,8 +48,14 @@ export interface VenuesResponse {
     };
 }
 
-export async function getVenues(): Promise<VenuesResponse> {
-    return apiFetch<VenuesResponse>("/holidaze/venues?limit=100&_bookings=true");
+export async function getVenues(sort?: string, sortOrder?: string): Promise<VenuesResponse> {
+    const params = new URLSearchParams({
+        limit: "100",
+        _bookings: "true",
+    });
+    if (sort) params.append("sort", sort);
+    if (sortOrder) params.append("sortOrder", sortOrder);
+    return apiFetch<VenuesResponse>(`/holidaze/venues?${params}`);
 }
 
 export async function getVenueById(id: string): Promise<VenueResponse> {
