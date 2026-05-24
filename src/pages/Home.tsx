@@ -5,6 +5,7 @@ import { getVenues } from "../api/venues";
 import type { Venue } from "../api/venues";
 import VenueCard from "../components/venues/VenueCard";
 import { useAuthStore } from "../store/authStore";
+import VenuesMapSection from "../components/venues/VenuesMapSection";
 
 const HOLIDAZE_VENUES_URL = "https://v2.api.noroff.dev/holidaze/venues";
 
@@ -93,6 +94,7 @@ export default function Home() {
 
     const [query, setQuery] = useState("");
     const [guests, setGuests] = useState("");
+    const [allVenues, setAllVenues] = useState<Venue[]>([]);
 
     const navigate = useNavigate();
     const { user } = useAuthStore();
@@ -161,6 +163,15 @@ export default function Home() {
             }
         }
 
+        async function fetchAllVenues() {
+            try {
+                const res = await getVenues();
+                setAllVenues(res.data);
+            } catch {
+                console.error("Failed to load all venues");
+            }
+        }
+        fetchAllVenues();
         fetchPopularVenues();
         fetchTopRatedVenues();
         fetchNewestVenues();
@@ -266,9 +277,10 @@ export default function Home() {
                 venues={mostPopularVenues}
                 loading={loadingMostPopular}
             />
+            {/*  venues with map */}
+            <VenuesMapSection venues={allVenues} />
 
-            {/* Trust section */}
-            {/* Trust section */}
+            {/* trust section */}
             <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
                 <p className="text-center text-sm font-bold uppercase tracking-[0.18em] text-orange-600 mb-2">Why Holidaze</p>
                 <h2 className="text-center text-2xl font-extrabold text-stone-900 mb-8 sm:text-3xl">Travel with confidence</h2>
