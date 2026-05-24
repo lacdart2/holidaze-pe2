@@ -208,21 +208,6 @@ export default function CreateVenue() {
                                 )}
                             </div>
                         </div>
-                        {/* <div className="grid gap-1.5">
-                            <label className="text-sm font-bold text-stone-700">
-                                Rating (0–5)
-                            </label>
-                            <input
-                                type="number"
-                                placeholder="e.g. 4"
-                                value={rating}
-                                onChange={(e) => setRating(e.target.value)}
-                                className="rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 shadow-[inset_0_1px_3px_rgba(0,0,0,0.05)] outline-none transition-all duration-200 placeholder:text-stone-400 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10"
-                                min="0"
-                                max="5"
-                                step="0.1"
-                            />
-                        </div> */}
                         <div className="grid gap-1.5">
                             <label className="text-sm font-bold text-stone-700">
                                 Rating

@@ -7,6 +7,8 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import CustomerDashboard from "../pages/CustomerDashboard";
 import ManagerDashboard from "../pages/ManagerDashboard";
+import CreateVenue from "../pages/CreateVenue";
+import EditVenue from "../pages/EditVenue";
 
 export default function AppRouter() {
     return (
@@ -20,6 +22,8 @@ export default function AppRouter() {
                     <Route path="register" element={<Register />} />
                     <Route path="dashboard" element={<CustomerDashboard />} />
                     <Route path="manager" element={<ManagerDashboard />} />
+                    <Route path="manager/create" element={<CreateVenue />} />
+                    <Route path="manager/edit/:id" element={<EditVenue />} />
                 </Route>
             </Routes>
         </BrowserRouter>
