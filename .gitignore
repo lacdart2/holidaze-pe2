@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 .env
 AI_LOG.mdAI_LOG.md
+docs/
