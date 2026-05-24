@@ -10,10 +10,8 @@ export default function Login() {
     const navigate = useNavigate();
     const setUser = useAuthStore((s) => s.setUser);
 
-    /*    const [email, setEmail] = useState("");
-       const [password, setPassword] = useState(""); */
-    const [email, setEmail] = useState("kader@stud.noroff.no");
-    const [password, setPassword] = useState("Kader-123");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
