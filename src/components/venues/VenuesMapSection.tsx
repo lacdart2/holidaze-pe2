@@ -37,8 +37,8 @@ export default function VenuesMapSection({ venues }: Props) {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
             <div className="flex items-end justify-between mb-6">
                 <div>
-                    <p className="text-sm font-bold uppercase tracking-[0.18em] text-orange-600 mb-1">Discover</p>
-                    <h2 className="text-2xl font-extrabold tracking-tight text-stone-900 sm:text-3xl">Explore venues on the map</h2>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-orange-500 mb-1">Discover</p>
+                    <h2 className="text-2xl font-bold text-gray-900">Explore venues on the map</h2>
                 </div>
                 <span className="text-sm text-gray-400">{mapped.length} venues with location</span>
             </div>
