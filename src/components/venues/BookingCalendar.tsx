@@ -1,5 +1,6 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useMemo } from "react";
 import { getBlockedCheckInDates, getBlockedCheckOutDates } from "../../utils/bookingDates";
 
 interface Booking {
@@ -16,11 +17,14 @@ interface Props {
 }
 
 export default function BookingCalendar({ bookings, dateFrom, dateTo, onChangeDateFrom, onChangeDateTo }: Props) {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = useMemo(() => {
+        const d = new Date();
+        d.setHours(0, 0, 0, 0);
+        return d;
+    }, []);
 
-    const blockedCheckIn = getBlockedCheckInDates(bookings);
-    const blockedCheckOut = getBlockedCheckOutDates(bookings);
+    const blockedCheckIn = useMemo(() => getBlockedCheckInDates(bookings), [bookings]);
+    const blockedCheckOut = useMemo(() => getBlockedCheckOutDates(bookings), [bookings]);
 
     return (
         <div className="flex flex-col gap-4">
