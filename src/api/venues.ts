@@ -11,6 +11,11 @@ export interface Venue {
     location: {
         city: string;
         country: string;
+        lat?: number;
+        lng?: number;
+        address?: string;
+        zip?: string;
+        continent?: string;
     };
     meta: {
         wifi: boolean;
