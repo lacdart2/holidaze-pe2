@@ -240,7 +240,7 @@ export default function CustomerDashboard() {
                                             booking.venue?.id &&
                                             navigate(`/venues/${booking.venue.id}`)
                                         }
-                                        className="group grid w-full gap-4 rounded-3xl bg-white p-4 text-left shadow-[0_4px_18px_rgba(28,25,23,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(28,25,23,0.12)] sm:grid-cols-[160px_1fr_auto] sm:items-center"
+                                        className="group grid w-full gap-4 rounded-3xl bg-white p-4 text-left shadow-[0_4px_18px_rgba(28,25,23,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(28,25,23,0.12)] sm:grid-cols-[160px_1fr_auto] sm:items-center cursor-pointer"
                                     >
                                         <img
                                             src={venueImage}
