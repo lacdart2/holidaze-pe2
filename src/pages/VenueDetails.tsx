@@ -12,7 +12,6 @@ import { getProfile, getProfileVenues } from "../api/profiles";
 import type { Profile } from "../api/profiles";
 import HostVenuesModal from "../components/venues/HostVenuesModal";
 import StarRating from "../components/common/StarRating";
-import VenueMap from "../components/venues/VenueMap";
 
 export default function VenueDetails() {
     const { id } = useParams();
@@ -235,13 +234,6 @@ export default function VenueDetails() {
                                 </span>
                             )}
                         </div>
-                        {venue.location?.lat && venue.location?.lng &&
-                            venue.location.lat !== 0 && venue.location.lng !== 0 && (
-                                <div className="mb-8">
-                                    <h2 className="text-lg font-semibold text-gray-900 mb-2">Location</h2>
-                                    <VenueMap lat={venue.location.lat} lng={venue.location.lng} name={venue.name} />
-                                </div>
-                            )}
                         {ownerProfile && (
                             <div className="bg-gray-50 border border-gray-100 rounded-2xl p-5">
                                 <div className="flex items-center gap-4 mb-4 pb-4 border-b border-gray-100">

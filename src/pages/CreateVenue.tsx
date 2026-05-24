@@ -30,8 +30,6 @@ export default function CreateVenue() {
     const [pets, setPets] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [rating, setRating] = useState("");
-    const [lat, setLat] = useState("");
-    const [lng, setLng] = useState("");
 
     if (!user || !user.venueManager) {
         navigate("/");
@@ -108,11 +106,7 @@ export default function CreateVenue() {
                     url: image.url,
                     alt: image.alt || name,
                 })),
-                location: {
-                    city,
-                    country,
-                    ...(lat && lng ? { lat: Number(lat), lng: Number(lng) } : {})
-                },
+                location: { city, country },
                 meta: { wifi, parking, breakfast, pets },
                 rating: rating ? Number(rating) : undefined,
             });
@@ -316,33 +310,27 @@ export default function CreateVenue() {
                         <div className="grid gap-4 sm:grid-cols-2">
                             <div className="grid gap-1.5">
                                 <label className="text-sm font-bold text-stone-700">City</label>
-                                <input type="text" placeholder="e.g. Oslo" value={city}
+                                <input
+                                    type="text"
+                                    placeholder="e.g. Oslo"
+                                    value={city}
                                     onChange={(e) => setCity(e.target.value)}
                                     className="rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 shadow-[inset_0_1px_3px_rgba(0,0,0,0.05)] outline-none transition-all duration-200 placeholder:text-stone-400 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10"
                                 />
                             </div>
+
                             <div className="grid gap-1.5">
                                 <label className="text-sm font-bold text-stone-700">Country</label>
-                                <input type="text" placeholder="e.g. Norway" value={country}
+                                <input
+                                    type="text"
+                                    placeholder="e.g. Norway"
+                                    value={country}
                                     onChange={(e) => setCountry(e.target.value)}
                                     className="rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 shadow-[inset_0_1px_3px_rgba(0,0,0,0.05)] outline-none transition-all duration-200 placeholder:text-stone-400 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10"
                                 />
                             </div>
-                            <div className="grid gap-1.5">
-                                <label className="text-sm font-bold text-stone-700">Latitude <span className="text-stone-400 font-normal">(optional)</span></label>
-                                <input type="number" placeholder="e.g. 59.9139" value={lat} step="any"
-                                    onChange={(e) => setLat(e.target.value)}
-                                    className="rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 shadow-[inset_0_1px_3px_rgba(0,0,0,0.05)] outline-none transition-all duration-200 placeholder:text-stone-400 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10"
-                                />
-                            </div>
-                            <div className="grid gap-1.5">
-                                <label className="text-sm font-bold text-stone-700">Longitude <span className="text-stone-400 font-normal">(optional)</span></label>
-                                <input type="number" placeholder="e.g. 10.7522" value={lng} step="any"
-                                    onChange={(e) => setLng(e.target.value)}
-                                    className="rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 shadow-[inset_0_1px_3px_rgba(0,0,0,0.05)] outline-none transition-all duration-200 placeholder:text-stone-400 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10"
-                                />
-                            </div>
                         </div>
+
                         <div>
                             <p className="mb-3 text-sm font-bold text-stone-700">Amenities</p>
                             <div className="grid gap-3 sm:grid-cols-2">
