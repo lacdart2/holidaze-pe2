@@ -63,7 +63,7 @@ export default function Register() {
                         <label className="text-sm text-gray-700">Username</label>
                         <input
                             type="text"
-                            placeholder="e.g. john_doe"
+                            placeholder="e.g. Max_adrian"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             className="border rounded-lg px-4 py-3 text-sm outline-none focus:border-orange-500"
