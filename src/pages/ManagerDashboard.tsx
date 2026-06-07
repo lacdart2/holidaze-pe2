@@ -136,7 +136,7 @@ export default function ManagerDashboard() {
                     <div className="bg-gradient-to-r from-orange-50 via-white to-orange-50 px-5 py-6 sm:px-8 sm:py-8">
                         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                             <div className="flex items-center gap-4 sm:gap-6">
-                                <img
+                                <img loading="lazy"
                                     src={avatarSrc}
                                     alt={`${user.name} avatar`}
                                     className="h-20 w-20 rounded-full border-4 border-orange-100 bg-white object-cover shadow-[0_4px_16px_rgba(234,88,12,0.16)] sm:h-24 sm:w-24"
@@ -273,7 +273,7 @@ export default function ManagerDashboard() {
                                         key={venue.id}
                                         className="overflow-hidden rounded-3xl bg-white shadow-[0_4px_18px_rgba(28,25,23,0.08)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(28,25,23,0.12)]"
                                     >
-                                        <img
+                                        <img loading="lazy"
                                             src={image}
                                             alt={venue.name}
                                             className="h-48 w-full object-cover"

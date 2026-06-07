@@ -166,7 +166,7 @@ export default function VenueDetails() {
                 </div>
                 {images.length === 1 ? (
                     <div className="h-80 sm:h-96 rounded-2xl overflow-hidden mb-8">
-                        <img
+                        <img loading="lazy"
                             src={images[0].url}
                             alt={images[0].alt || venue.name}
                             onError={(e) => { e.currentTarget.src = "https://placehold.co/1200x600?text=No+Image"; }}
@@ -176,7 +176,7 @@ export default function VenueDetails() {
                 ) : (
                     <div className="grid grid-cols-4 grid-rows-2 gap-2 h-80 sm:h-96 rounded-2xl overflow-hidden mb-8">
                         <div className="col-span-2 row-span-2">
-                            <img
+                            <img loading="lazy"
                                 src={images[activeImage]?.url}
                                 alt={images[activeImage]?.alt || venue.name}
                                 onError={(e) => { e.currentTarget.src = "https://placehold.co/600x400?text=No+Image"; }}
@@ -189,7 +189,7 @@ export default function VenueDetails() {
                                 className="relative cursor-pointer overflow-hidden"
                                 onClick={() => setActiveImage(i + 1)}
                             >
-                                <img
+                                <img loading="lazy"
                                     src={img.url}
                                     alt={img.alt || venue.name}
                                     onError={(e) => { e.currentTarget.src = "https://placehold.co/300x200?text=No+Image"; }}
@@ -246,7 +246,7 @@ export default function VenueDetails() {
                             <div className="bg-gray-50 border border-gray-100 rounded-2xl p-5">
                                 <div className="flex items-center gap-4 mb-4 pb-4 border-b border-gray-100">
                                     <div className="relative flex-shrink-0">
-                                        <img
+                                        <img loading="lazy"
                                             src={ownerProfile.avatar?.url || "https://placehold.co/56x56?text=?"}
                                             alt={ownerProfile.name}
                                             onError={(e) => { e.currentTarget.src = "https://placehold.co/56x56?text=?"; }}

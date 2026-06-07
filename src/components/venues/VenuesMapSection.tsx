@@ -52,7 +52,7 @@ export default function VenuesMapSection({ venues }: Props) {
                         <Marker key={v.id} position={[v.location.lat!, v.location.lng!]} icon={orangePin}>
                             <Popup>
                                 <div style={{ width: "200px", fontFamily: "sans-serif" }}>
-                                    <img
+                                    <img loading="lazy"
                                         src={v.media?.[0]?.url || "https://placehold.co/200x100?text=No+Image"}
                                         alt={v.name}
                                         style={{ width: "100%", height: "110px", objectFit: "cover", borderRadius: "8px", marginBottom: "10px" }}

@@ -20,7 +20,7 @@ export default function VenueCard({ venue }: Props) {
         >
             {/*  hint for more images if there is */}
             <div className="relative">
-                <img
+                <img loading="lazy"
                     src={image}
                     alt={venue.media?.[0]?.alt || venue.name}
                     onError={(e) => {

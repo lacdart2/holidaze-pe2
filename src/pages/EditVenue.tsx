@@ -340,7 +340,7 @@ export default function EditVenue() {
                                             key={image.url}
                                             className="relative overflow-hidden rounded-2xl bg-white shadow-[0_4px_14px_rgba(28,25,23,0.08)]"
                                         >
-                                            <img
+                                            <img loading="lazy"
                                                 src={image.url}
                                                 alt={image.alt}
                                                 className="h-36 w-full object-cover"

@@ -110,7 +110,7 @@ export default function Navbar() {
                                 aria-expanded={dropdownOpen}
                                 aria-label="Open user menu"
                             >
-                                <img
+                                <img loading="lazy"
                                     src={avatarSrc}
                                     alt={`${user.name} avatar`}
                                     className="h-9 w-9 rounded-full border-2 border-orange-100 object-cover"
@@ -227,7 +227,7 @@ export default function Navbar() {
                                             onClick={closeMenus}
                                             className="flex items-center gap-3"
                                         >
-                                            <img
+                                            <img loading="lazy"
                                                 src={avatarSrc}
                                                 alt={`${user.name} avatar`}
                                                 className="h-12 w-12 rounded-full border-2 border-orange-200 bg-white object-cover"

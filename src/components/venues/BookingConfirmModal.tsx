@@ -62,7 +62,7 @@ export default function BookingConfirmModal({
 
                 <div className="bg-gray-50 rounded-xl p-4 mb-4">
                     <div className="flex items-center gap-3 mb-3 pb-3 border-b border-gray-200">
-                        <img
+                        <img loading="lazy"
                             src={venueImage}
                             alt={venueName}
                             className="w-12 h-12 rounded-lg object-cover"

@@ -102,7 +102,7 @@ export default function CustomerDashboard() {
                     <div className="bg-gradient-to-r from-orange-50 via-white to-orange-50 px-5 py-6 sm:px-8 sm:py-8">
                         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                             <div className="flex items-center gap-4 sm:gap-6">
-                                <img
+                                <img loading="lazy"
                                     src={avatarSrc}
                                     alt={`${user.name} avatar`}
                                     className="h-20 w-20 rounded-full border-4 border-orange-100 bg-white object-cover shadow-[0_4px_16px_rgba(234,88,12,0.16)] sm:h-24 sm:w-24"
@@ -242,7 +242,7 @@ export default function CustomerDashboard() {
                                         }
                                         className="group grid w-full gap-4 rounded-3xl bg-white p-4 text-left shadow-[0_4px_18px_rgba(28,25,23,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(28,25,23,0.12)] sm:grid-cols-[160px_1fr_auto] sm:items-center cursor-pointer"
                                     >
-                                        <img
+                                        <img loading="lazy"
                                             src={venueImage}
                                             alt={booking.venue?.name || "Venue image"}
                                             className="h-44 w-full rounded-2xl object-cover sm:h-28"

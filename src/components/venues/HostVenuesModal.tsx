@@ -35,7 +35,7 @@ export default function HostVenuesModal({ hostName, venues, onClose }: Props) {
                             onClick={onClose}
                             className="flex items-center gap-4 border border-gray-100 rounded-xl p-3 hover:bg-orange-50 hover:border-orange-100 transition-colors duration-200"
                         >
-                            <img
+                            <img loading="lazy"
                                 src={venue.media?.[0]?.url || "https://placehold.co/60x60?text=?"}
                                 alt={venue.name}
                                 onError={(e) => { e.currentTarget.src = "https://placehold.co/60x60?text=?"; }}
