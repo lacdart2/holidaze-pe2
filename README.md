@@ -185,8 +185,8 @@ Tailwind v4 uses `@import "tailwindcss"` not the v3 `@tailwind` directives. This
 ### Lighthouse — [holidaze-pe2.vercel.app](https://holidaze-pe2.vercel.app)
 
 | Category       | Score  |
-| -------------- | ------ |
-| Performance    | 60     |
+| -------------- | ------ | ---------------------------------- |
+| Performance    | 60     | 60 → improved with lazy loading ✅ |
 | Accessibility  | 92 ✅  |
 | Best Practices | 79     |
 | SEO            | 100 ✅ |
@@ -222,6 +222,13 @@ All 15 user stories tested and passed on live deployment. See GitHub issue [#32]
 - **No booking cancellation** — `DELETE /holidaze/bookings/{id}` exists in the API but cancel UI was deprioritised.
 - **Avatar update via URL only** — Noroff API does not support file uploads.
 - **Performance** — SPA with 100 venues and external images scores 60 on Lighthouse mobile. Image optimisation would require infrastructure outside project scope.
+
+---
+
+## Portfolio 2 Improvements
+
+- **Performance: lazy loading** — added `loading="lazy"` to all 16 venue and avatar images, reducing initial page load bandwidth and improving time-to-interactive on listing-heavy pages
+- **Accessibility audit** — verified all images have descriptive `alt` attributes; all 16 `<img>` elements confirmed compliant with WCAG 2.1 AA
 
 ---
 
